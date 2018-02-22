@@ -1,3 +1,4 @@
+import java.io.*;
 
 public class AIRobotNavigation {
 
@@ -5,6 +6,11 @@ public class AIRobotNavigation {
     {
         String filename;
         filename = args[0];
+        try{
+            FileReader fr = new FileReader(filename);
+        } catch (FileNotFoundException e) {
+            System.out.println("That file doesn't exist!");
+        }
     }
 
 }
