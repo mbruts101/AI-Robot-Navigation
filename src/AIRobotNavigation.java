@@ -34,16 +34,20 @@ public class AIRobotNavigation {
                     String rowChars[] = line.split("");
                     for(int y = 0; y < boardSize; y++){
                         board[x-1][y] = rowChars[y];
-                        if(rowChars[y] == "i"){
+                        rowChars[y] = rowChars[y].trim();
+                        if(rowChars[y].equals("i")){
+                            System.out.println("Reaching this!!");
                             initial = new Node(x-1, y);
                         }
-                        if(rowChars[y] == "g"){
+                        if(rowChars[y].equals("g")){
                             goal = new Node(x-1,y);
                         }
                     }
                 }
                 x++;
             }
+            System.out.println(goal.row + "" + goal.column);
+            System.out.println(initial.row + "" + initial.column);
             baseBoard = board;
             visitedNodes.add(initial);
             bestPath.add(new Path((double)0, initial));
