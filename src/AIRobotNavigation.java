@@ -94,7 +94,11 @@ public class AIRobotNavigation {
 
 
                 }
-
+                for(Node node: bestPath.get(0).paths){
+                    if(node != initial && node != goal){
+                        board[(int) node.row][(int) node.column] = "o";
+                    }
+                }
                 for (int a = 0; a < boardSize; ++a) {
                     for (int j = 0; j < boardSize ; ++j) {
                         output.print(board[a][j]);
