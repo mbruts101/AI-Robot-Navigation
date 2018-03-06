@@ -2,16 +2,19 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class AIRobotNavigation {
-
-    public static  void main(String[] args)
+    static ArrayList<Node>VisitedNodes = new ArrayList<Node>();
+    public static void main(String[] args)
     {
-        ArrayList<Node>VisitedNodes = new ArrayList<Node>();
+        //Variable Declarations
+
         int boardSize = 0;
         String filename;
         Node initial = null;
         Node goal = null;
         filename = args[0];
         String[][] board = null;
+        ArrayList<Path> bestPath = new ArrayList<Path>();
+        //Read in file and create the board
         try{
             String line;
             FileReader fr = new FileReader(filename);
@@ -38,18 +41,49 @@ public class AIRobotNavigation {
                 x++;
             }
             VisitedNodes.add(initial);
+            //While not at the goal
+            while(bestPath.get(0).paths.get(bestPath.get(0).paths.size()-1) != goal){
+                Path currentBest = bestPath.remove(0);
+                Node currentNode = currentBest.paths.get(currentBest.paths.size()-1);
+
+                Node newNode;
+
+                if(currentNode.row-1 != -1 && board[(int) (currentNode.row -1)][(int) currentNode.column] != "+"){
+                    Path up = new Path(currentBest);
+                    newNode = new Node(currentNode.row-1, currentNode.column);
+                    if(FindIfVisited(newNode) == false){
+                        bestPath.add(CalculateDistances(up, newNode));
+                    }
+                }
+            }
 
         } catch (FileNotFoundException e) {
             System.out.println("That file doesn't exist!");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
     public double EuclidianDistance(Node current, Node next){
         return Math.sqrt(Math.pow((current.row - next.row), 2)  + Math.pow((current.column - next.column), 2));
     }
     public double ManhattanDistance(Node current, Node next){
         return Math.abs(current.row - next.row) + Math.abs(current.column - next.column);
+    }
+    public static boolean FindIfVisited(Node pointToCheck){
+        for(Node node : VisitedNodes){
+            if(pointToCheck.row == node.row && pointToCheck.column == node.column){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+    public static Path CalculateDistances(Path path, Node second){
+
     }
 
 }
