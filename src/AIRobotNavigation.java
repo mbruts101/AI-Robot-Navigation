@@ -16,6 +16,7 @@ public class AIRobotNavigation {
 
         filename = args[0];
         String[][] board = null;
+        String[][] baseBoard = null;
 
         //Read in file and create the board
         try{
@@ -44,6 +45,7 @@ public class AIRobotNavigation {
                 }
                 x++;
             }
+            baseBoard = board;
             visitedNodes.add(initial);
             bestPath.add(new Path((double)0, initial));
             //Run 4 times for each test
@@ -103,7 +105,7 @@ public class AIRobotNavigation {
                 output.println("\nNumber of steps taken: " + bestPath.get(0).pathCost);
                 output.println("Number of nodes traversed: " + bestPath.get(0).size());
                 output.println("\n\n");
-                
+                board = baseBoard;
             }
             output.close();
 
