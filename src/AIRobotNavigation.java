@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AIRobotNavigation {
-    static ArrayList<Node>VisitedNodes = new ArrayList<Node>();
+    static ArrayList<Node> visitedNodes = new ArrayList<Node>();
     static List<Path> bestPath = new ArrayList<Path>();
     static Node initial = null;
     static Node goal = null;
@@ -44,7 +44,7 @@ public class AIRobotNavigation {
                 }
                 x++;
             }
-            VisitedNodes.add(initial);
+            visitedNodes.add(initial);
             bestPath.add(new Path((double)0, initial));
             //Run 4 times for each test
             for(int i = 0; i < 4; i++) {
@@ -59,7 +59,7 @@ public class AIRobotNavigation {
                         Path left = new Path(currentBest);
                         newNode = new Node(currentNode.row - 1, currentNode.column);
                         if (FindIfVisited(newNode) == false) {
-                            VisitedNodes.add(newNode);
+                            visitedNodes.add(newNode);
                             bestPath.add(CalculateDistances(left, newNode, i));
                         }
                     }
@@ -68,7 +68,7 @@ public class AIRobotNavigation {
                         Path right = new Path(currentBest);
                         newNode = new Node(currentNode.row + 1, currentNode.column);
                         if (FindIfVisited(newNode) == false) {
-                            VisitedNodes.add(newNode);
+                            visitedNodes.add(newNode);
                             bestPath.add(CalculateDistances(right, newNode, i));
                         }
                     }
@@ -77,7 +77,7 @@ public class AIRobotNavigation {
                         Path up = new Path(currentBest);
                         newNode = new Node(currentNode.row, currentNode.column-1);
                         if(FindIfVisited(newNode) == false){
-                            VisitedNodes.add(newNode);
+                            visitedNodes.add(newNode);
                             bestPath.add(CalculateDistances(up, newNode, i));
                         }
                     }
@@ -86,7 +86,7 @@ public class AIRobotNavigation {
                         Path down = new Path(currentBest);
                         newNode = new Node(currentNode.row, currentNode.column+1);
                         if(FindIfVisited(newNode) == false){
-                            VisitedNodes.add(newNode);
+                            visitedNodes.add(newNode);
                             bestPath.add(CalculateDistances(down, newNode, i));
                         }
                     }
@@ -111,12 +111,9 @@ public class AIRobotNavigation {
         return Math.abs(current.row - next.row) + Math.abs(current.column - next.column);
     }
     public static boolean FindIfVisited(Node pointToCheck){
-        for(Node node : VisitedNodes){
+        for(Node node : visitedNodes){
             if(pointToCheck.row == node.row && pointToCheck.column == node.column){
                 return true;
-            }
-            else{
-                return false;
             }
         }
         return false;
