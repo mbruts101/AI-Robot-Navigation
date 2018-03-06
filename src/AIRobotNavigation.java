@@ -28,7 +28,6 @@ public class AIRobotNavigation {
             while((line = br.readLine()) != null){
                 if(boardSize == 0){
                     boardSize = Integer.parseInt(line);
-                    System.out.println(boardSize);
                     board = new String[boardSize][boardSize];
                 }
                 else {
@@ -96,14 +95,15 @@ public class AIRobotNavigation {
 
                 }
 
-                for (int i = 0; i < boardSize; ++i) {
+                for (int a = 0; a < boardSize; ++a) {
                     for (int j = 0; j < boardSize ; ++j) {
-                        output.print(board[i][j])
+                        output.print(board[a][j]);
                     }
+                    output.println();
                 }
 
                 output.println("\nNumber of steps taken: " + bestPath.get(0).pathCost);
-                output.println("Number of nodes traversed: " + bestPath.get(0).size());
+                output.println("Number of nodes traversed: " + bestPath.get(0).length);
                 output.println("\n\n");
                 board = baseBoard;
             }
@@ -132,9 +132,9 @@ public class AIRobotNavigation {
         }
         return false;
     }
-    public static Path CalculateDistances(Path current, Node newNode, int mode){
+    public static Path CalculateDistances(Path current, Node newNode, int mode) {
         current.pathCost++;
-        switch (mode){
+        switch (mode) {
             case 1:
                 //Euclidian Distance
                 current.length = EuclidianDistance(newNode, goal);
@@ -153,13 +153,6 @@ public class AIRobotNavigation {
         current.paths.add(newNode);
         Collections.sort(bestPath);
         return current;
-    }
-
-    public void OutputData(String[][] map, int boardSize)
-    {
-        
-
-        output.println
     }
 
 }
