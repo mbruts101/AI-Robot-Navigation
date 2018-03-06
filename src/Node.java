@@ -16,7 +16,7 @@ public class  Node{
 
     @Override
     public String toString(){
-    	String loc = "(" + this.row + ", " + this.column + ")":
+    	String loc = "(" + this.row + ", " + this.column + ")";
     	return loc;
     }
 }
