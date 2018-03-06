@@ -45,22 +45,24 @@ public class AIRobotNavigation {
                 x++;
             }
             VisitedNodes.add(initial);
-            for(int i = 0; i < 4; i++S)
-            //While not at the goal
-            while(bestPath.get(0).paths.get(bestPath.get(0).paths.size()-1) != goal){
-                Path currentBest = bestPath.remove(0);
-                Node currentNode = currentBest.paths.get(currentBest.paths.size()-1);
+            //Run 4 times for each process
+            for(int i = 0; i < 4; i++){
+                //While not at the goal
+                while(bestPath.get(0).paths.get(bestPath.get(0).paths.size()-1) != goal){
+                    Path currentBest = bestPath.remove(0);
+                    Node currentNode = currentBest.paths.get(currentBest.paths.size()-1);
 
-                Node newNode;
+                    Node newNode;
 
-                if(currentNode.row-1 != -1 && board[(int) (currentNode.row -1)][(int) currentNode.column] != "+"){
-                    Path up = new Path(currentBest);
-                    newNode = new Node(currentNode.row-1, currentNode.column);
-                    if(FindIfVisited(newNode) == false){
-                        VisitedNodes.add(newNode);
-                        bestPath.add(CalculateDistances(up, newNode, 1));
+                    if(currentNode.row-1 != -1 && board[(int) (currentNode.row -1)][(int) currentNode.column] != "+"){
+                        Path up = new Path(currentBest);
+                        newNode = new Node(currentNode.row-1, currentNode.column);
+                        if(FindIfVisited(newNode) == false){
+                            VisitedNodes.add(newNode);
+                            bestPath.add(CalculateDistances(up, newNode, 1));
+                            }
+                        }
                     }
-                }
             }
 
         } catch (FileNotFoundException e) {
@@ -94,7 +96,7 @@ public class AIRobotNavigation {
         switch (mode){
             case 1:
                 //Euclidian Distance
-                current.length = EuclidianDistance(newNode, goal;
+                current.length = EuclidianDistance(newNode, goal);
                 break;
             case 2:
                 //Manhattan Distance
