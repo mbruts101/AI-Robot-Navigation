@@ -50,7 +50,7 @@ public class AIRobotNavigation {
             //Run 4 times for each test
             for(int i = 0; i < 4; i++) {
                 //While not at the goal
-                while (bestPath.get(0).paths.get(bestPath.get(0).paths.size() - 1) != goal) {
+                while (!bestPath.get(0).paths.get(bestPath.get(0).paths.size() - 1).equals(goal)) {
                     Path currentBest = bestPath.remove(0);
                     Node currentNode = currentBest.paths.get(currentBest.paths.size() - 1);
 
@@ -107,9 +107,12 @@ public class AIRobotNavigation {
                 }
 
                 output.println("\nNumber of steps taken: " + bestPath.get(0).pathCost);
-                output.println("Number of nodes traversed: " + bestPath.get(0).length);
+                output.println("Number of nodes traversed: " + bestPath.size());
                 output.println("\n\n");
                 board = baseBoard;
+                visitedNodes.clear();
+                bestPath.add(new Path((double)0, initial));
+                visitedNodes.add(initial);
             }
             output.close();
 

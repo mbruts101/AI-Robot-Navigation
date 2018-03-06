@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b29507a2-92bf-4c01-8196-2e28701b501c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/out/production/AI-Robot-Navigation/AIRobotNavigation.class" afterPath="$PROJECT_DIR$/out/production/AI-Robot-Navigation/AIRobotNavigation.class" />
       <change beforePath="$PROJECT_DIR$/output.txt" afterPath="$PROJECT_DIR$/output.txt" />
       <change beforePath="$PROJECT_DIR$/src/AIRobotNavigation.java" afterPath="$PROJECT_DIR$/src/AIRobotNavigation.java" />
     </list>
@@ -19,8 +20,8 @@
       <file leaf-file-name="AIRobotNavigation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AIRobotNavigation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="98" column="63" lean-forward="false" selection-start-line="98" selection-start-column="57" selection-end-line="98" selection-end-column="63" />
+            <state relative-caret-position="353">
+              <caret line="50" column="33" lean-forward="false" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#214#220#0" expanded="true" />
@@ -76,6 +77,7 @@
       <find>Visit</find>
       <find>best</find>
       <find>output</find>
+      <find>baseboard</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -98,10 +100,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="99" />
-    <option name="y" value="-14" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -741,14 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Path.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Node.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -757,10 +751,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AIRobotNavigation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="98" column="63" lean-forward="false" selection-start-line="98" selection-start-column="57" selection-end-line="98" selection-end-column="63" />
+        <state relative-caret-position="353">
+          <caret line="50" column="33" lean-forward="false" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#214#220#0" expanded="true" />
