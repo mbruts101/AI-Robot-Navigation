@@ -45,24 +45,54 @@ public class AIRobotNavigation {
                 x++;
             }
             VisitedNodes.add(initial);
-            //Run 4 times for each process
-            for(int i = 0; i < 4; i++){
+            bestPath.add(new Path((double)0, initial));
+            //Run 4 times for each test
+            for(int i = 0; i < 4; i++) {
                 //While not at the goal
-                while(bestPath.get(0).paths.get(bestPath.get(0).paths.size()-1) != goal){
+                while (bestPath.get(0).paths.get(bestPath.get(0).paths.size() - 1) != goal) {
                     Path currentBest = bestPath.remove(0);
-                    Node currentNode = currentBest.paths.get(currentBest.paths.size()-1);
+                    Node currentNode = currentBest.paths.get(currentBest.paths.size() - 1);
 
                     Node newNode;
-
-                    if(currentNode.row-1 != -1 && board[(int) (currentNode.row -1)][(int) currentNode.column] != "+"){
-                        Path up = new Path(currentBest);
-                        newNode = new Node(currentNode.row-1, currentNode.column);
-                        if(FindIfVisited(newNode) == false){
+                    //Checking the left node
+                    if (currentNode.row - 1 != -1 && board[(int) (currentNode.row - 1)][(int) currentNode.column] != "+") {
+                        Path left = new Path(currentBest);
+                        newNode = new Node(currentNode.row - 1, currentNode.column);
+                        if (FindIfVisited(newNode) == false) {
                             VisitedNodes.add(newNode);
-                            bestPath.add(CalculateDistances(up, newNode, 1));
-                            }
+                            bestPath.add(CalculateDistances(left, newNode, i));
                         }
                     }
+                    //Check the right node
+                    if (currentNode.row + 1 != boardSize && board[(int) (currentNode.row + 1)][(int) currentNode.column] != "+") {
+                        Path right = new Path(currentBest);
+                        newNode = new Node(currentNode.row + 1, currentNode.column);
+                        if (FindIfVisited(newNode) == false) {
+                            VisitedNodes.add(newNode);
+                            bestPath.add(CalculateDistances(right, newNode, i));
+                        }
+                    }
+                    //Check the above node
+                    if(currentNode.column-1 != -1 && board[(int) (currentNode.row)][(int) currentNode.column-1] != "+"){
+                        Path up = new Path(currentBest);
+                        newNode = new Node(currentNode.row, currentNode.column-1);
+                        if(FindIfVisited(newNode) == false){
+                            VisitedNodes.add(newNode);
+                            bestPath.add(CalculateDistances(up, newNode, i));
+                        }
+                    }
+                    //Check the below node
+                    if(currentNode.column+1 != boardSize && board[(int) (currentNode.row)][(int) currentNode.column+1] != "+"){
+                        Path down = new Path(currentBest);
+                        newNode = new Node(currentNode.row, currentNode.column+1);
+                        if(FindIfVisited(newNode) == false){
+                            VisitedNodes.add(newNode);
+                            bestPath.add(CalculateDistances(down, newNode, i));
+                        }
+                    }
+
+
+                }
             }
 
         } catch (FileNotFoundException e) {
@@ -110,8 +140,10 @@ public class AIRobotNavigation {
                 break;
         }
         current.paths.add(newNode);
+        Collections.sort(bestPath);
         return current;
     }
+
 
 }
 

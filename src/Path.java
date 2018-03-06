@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Path {
+public class Path implements  Comparable<Path>{
     double length;
     double pathCost;
     ArrayList<Node> paths = new ArrayList<Node>();
@@ -13,5 +13,18 @@ public class Path {
         this.length = newPath.length;
         this.paths = (ArrayList<Node>) newPath.paths.clone();
         this.pathCost = newPath.pathCost;
+    }
+
+    @Override
+    public int compareTo(Path o) {
+        if(this.length > o.length){
+            return 1;
+        }
+        else if(this.length == o.length){
+            return 0;
+        }
+        else {
+            return 1;
+        }
     }
 }
