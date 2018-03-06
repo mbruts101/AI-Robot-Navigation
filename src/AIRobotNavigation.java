@@ -1,19 +1,23 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class AIRobotNavigation {
     static ArrayList<Node>VisitedNodes = new ArrayList<Node>();
+    static List<Path> bestPath = new ArrayList<Path>();
+    static Node initial = null;
+    static Node goal = null;
     public static void main(String[] args)
     {
         //Variable Declarations
 
         int boardSize = 0;
         String filename;
-        Node initial = null;
-        Node goal = null;
+
         filename = args[0];
         String[][] board = null;
-        ArrayList<Path> bestPath = new ArrayList<Path>();
+
         //Read in file and create the board
         try{
             String line;
@@ -41,6 +45,7 @@ public class AIRobotNavigation {
                 x++;
             }
             VisitedNodes.add(initial);
+            for(int i = 0; i < 4; i++S)
             //While not at the goal
             while(bestPath.get(0).paths.get(bestPath.get(0).paths.size()-1) != goal){
                 Path currentBest = bestPath.remove(0);
@@ -52,7 +57,8 @@ public class AIRobotNavigation {
                     Path up = new Path(currentBest);
                     newNode = new Node(currentNode.row-1, currentNode.column);
                     if(FindIfVisited(newNode) == false){
-                        bestPath.add(CalculateDistances(up, newNode));
+                        VisitedNodes.add(newNode);
+                        bestPath.add(CalculateDistances(up, newNode, 1));
                     }
                 }
             }
@@ -65,10 +71,11 @@ public class AIRobotNavigation {
 
 
     }
-    public double EuclidianDistance(Node current, Node next){
+
+    public static double EuclidianDistance(Node current, Node next){
         return Math.sqrt(Math.pow((current.row - next.row), 2)  + Math.pow((current.column - next.column), 2));
     }
-    public double ManhattanDistance(Node current, Node next){
+    public static double ManhattanDistance(Node current, Node next){
         return Math.abs(current.row - next.row) + Math.abs(current.column - next.column);
     }
     public static boolean FindIfVisited(Node pointToCheck){
@@ -82,8 +89,26 @@ public class AIRobotNavigation {
         }
         return false;
     }
-    public static Path CalculateDistances(Path path, Node second){
-
+    public static Path CalculateDistances(Path current, Node newNode, int mode){
+        current.pathCost++;
+        switch (mode){
+            case 1:
+                //Euclidian Distance
+                current.length = EuclidianDistance(newNode, goal;
+                break;
+            case 2:
+                //Manhattan Distance
+                current.length = ManhattanDistance(newNode, goal);
+                break;
+            case 3:
+                current.length = current.pathCost + EuclidianDistance(newNode, goal);
+                break;
+            case 4:
+                current.length = current.pathCost + ManhattanDistance(newNode, goal);
+                break;
+        }
+        current.paths.add(newNode);
+        return current;
     }
 
 }
