@@ -27,7 +27,7 @@ public class AIRobotNavigation {
             int x = 0;
             while((line = br.readLine()) != null){
                 if(boardSize == 0){
-                    boardSize = Integer.parseInt(line);
+                    boardSize = Integer.parseInt(line.trim());
                     board = new String[boardSize][boardSize];
                     baseBoard = new String[boardSize][boardSize];
                 }
@@ -133,6 +133,8 @@ public class AIRobotNavigation {
             System.out.println("That file doesn't exist!");
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e){
+            System.out.println("That isn't a valid number for your board size");
         }
 
 
