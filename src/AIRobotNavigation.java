@@ -29,6 +29,7 @@ public class AIRobotNavigation {
                 if(boardSize == 0){
                     boardSize = Integer.parseInt(line);
                     board = new String[boardSize][boardSize];
+                    baseBoard = new String[boardSize][boardSize];
                 }
                 else {
                     String rowChars[] = line.split("");
@@ -46,9 +47,11 @@ public class AIRobotNavigation {
                 }
                 x++;
             }
-            System.out.println(goal.row + "" + goal.column);
-            System.out.println(initial.row + "" + initial.column);
-            baseBoard = board;
+            for(int t = 0; t < boardSize; t++){
+                for(int y = 0; y <boardSize; y++){
+                    baseBoard[t][y] = board[t][y];
+                }
+            }
             visitedNodes.add(initial);
             bestPath.add(new Path((double)0, initial));
             //Run 4 times for each test
@@ -60,7 +63,7 @@ public class AIRobotNavigation {
 
                     Node newNode;
                     //Checking the left node
-                    if (currentNode.row - 1 != -1 && board[(int) (currentNode.row - 1)][(int) currentNode.column] != "+") {
+                    if (currentNode.row - 1 != -1 && !board[(int) (currentNode.row - 1)][(int) currentNode.column].equals( "+")) {
                         Path left = new Path(currentBest);
                         newNode = new Node(currentNode.row - 1, currentNode.column);
                         if (FindIfVisited(newNode) == false) {
@@ -69,7 +72,7 @@ public class AIRobotNavigation {
                         }
                     }
                     //Check the right node
-                    if (currentNode.row + 1 != boardSize && board[(int) (currentNode.row + 1)][(int) currentNode.column] != "+") {
+                    if (currentNode.row + 1 != boardSize && !board[(int) (currentNode.row + 1)][(int) currentNode.column].equals("+")) {
                         Path right = new Path(currentBest);
                         newNode = new Node(currentNode.row + 1, currentNode.column);
                         if (FindIfVisited(newNode) == false) {
@@ -78,7 +81,7 @@ public class AIRobotNavigation {
                         }
                     }
                     //Check the above node
-                    if(currentNode.column-1 != -1 && board[(int) (currentNode.row)][(int) currentNode.column-1] != "+"){
+                    if(currentNode.column-1 != -1 && !board[(int) (currentNode.row)][(int) currentNode.column-1].equals("+")){
                         Path up = new Path(currentBest);
                         newNode = new Node(currentNode.row, currentNode.column-1);
                         if(FindIfVisited(newNode) == false){
@@ -87,7 +90,7 @@ public class AIRobotNavigation {
                         }
                     }
                     //Check the below node
-                    if(currentNode.column+1 != boardSize && board[(int) (currentNode.row)][(int) currentNode.column+1] != "+"){
+                    if(currentNode.column+1 != boardSize && !board[(int) (currentNode.row)][(int) currentNode.column+1].equals("+")){
                         Path down = new Path(currentBest);
                         newNode = new Node(currentNode.row, currentNode.column+1);
                         if(FindIfVisited(newNode) == false){
@@ -115,8 +118,14 @@ public class AIRobotNavigation {
                 output.println("\n\n");
                 board = baseBoard;
                 visitedNodes.clear();
+                bestPath.clear();;
                 bestPath.add(new Path((double)0, initial));
                 visitedNodes.add(initial);
+                for(int t = 0; t < boardSize; t++){
+                    for(int y = 0; y <boardSize; y++){
+                        board[t][y] = baseBoard[t][y];
+                    }
+                }
             }
             output.close();
 
