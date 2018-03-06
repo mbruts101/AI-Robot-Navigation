@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AIRobotNavigation {
+    static int boardSize;
     static ArrayList<Node> visitedNodes = new ArrayList<Node>();
     static List<Path> bestPath = new ArrayList<Path>();
     static Node initial = null;
@@ -11,8 +12,6 @@ public class AIRobotNavigation {
     public static void main(String[] args)
     {
         //Variable Declarations
-
-        int boardSize = 0;
         String filename;
 
         filename = args[0];
@@ -21,6 +20,7 @@ public class AIRobotNavigation {
         //Read in file and create the board
         try{
             String line;
+            PrintWriter output = new PrintWriter("output.txt", "UTF-8");
             FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
             int x = 0;
@@ -93,7 +93,19 @@ public class AIRobotNavigation {
 
 
                 }
+
+                for (int i = 0; i < boardSize; ++i) {
+                    for (int j = 0; j < boardSize ; ++j) {
+                        output.print(board[i][j])
+                    }
+                }
+
+                output.println("\nNumber of steps taken: " + bestPath.get(0).pathCost);
+                output.println("Number of nodes traversed: " + bestPath.get(0).size());
+                output.println("\n\n");
+                
             }
+            output.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("That file doesn't exist!");
@@ -141,6 +153,12 @@ public class AIRobotNavigation {
         return current;
     }
 
+    public void OutputData(String[][] map, int boardSize)
+    {
+        
+
+        output.println
+    }
 
 }
 
