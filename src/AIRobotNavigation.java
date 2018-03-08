@@ -21,6 +21,7 @@ public class AIRobotNavigation {
         //Read in file and create the board
         try{
             String line;
+
             PrintWriter output = new PrintWriter("output.txt", "UTF-8");
             FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
