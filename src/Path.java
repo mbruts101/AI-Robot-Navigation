@@ -1,17 +1,20 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Path implements  Comparable<Path>{
     double length;
     double pathCost;
-    ArrayList<Node> paths = new ArrayList<Node>();
+    List<Node> nodes = new ArrayList<Node>();
 
     Path(Double length, Node node){
         this.length = length;
-        paths.add(node);
+        nodes.add(node);
     }
     Path(Path newPath){
         this.length = newPath.length;
-        this.paths = (ArrayList<Node>) newPath.paths.clone();
+        for(Node node: newPath.nodes){
+            this.nodes.add(node);
+        }
         this.pathCost = newPath.pathCost;
     }
 
@@ -24,7 +27,7 @@ public class Path implements  Comparable<Path>{
             return 0;
         }
         else {
-            return 1;
+            return -1;
         }
     }
 }

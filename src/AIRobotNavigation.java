@@ -35,10 +35,10 @@ public class AIRobotNavigation {
                 else {
                     String rowChars[] = line.split("");
                     for(int y = 0; y < boardSize; y++){
-                        board[x-1][y] = rowChars[y];
                         rowChars[y] = rowChars[y].trim();
+                        board[x-1][y] = rowChars[y];
+
                         if(rowChars[y].equals("i")){
-                            System.out.println("Reaching this!!");
                             initial = new Node(x-1, y);
                         }
                         if(rowChars[y].equals("g")){
@@ -53,18 +53,23 @@ public class AIRobotNavigation {
                     baseBoard[t][y] = board[t][y];
                 }
             }
-            visitedNodes.add(initial);
-            bestPath.add(new Path((double)0, initial));
-            //Run 4 times for each test
-            for(int i = 0; i < 4; i++) {
-                //While not at the goal
-                while (!bestPath.get(0).paths.get(bestPath.get(0).paths.size() - 1).equals(goal)) {
-                    Path currentBest = bestPath.remove(0);
-                    Node currentNode = currentBest.paths.get(currentBest.paths.size() - 1);
 
+            //Run 4 times for each test
+            for(int i = 1; i <= 4; i++) {
+                visitedNodes.add(initial);
+                bestPath.add(new Path((double)0, initial));
+                //While not at the goal
+                while (!bestPath.get(0).nodes.get(bestPath.get(0).nodes.size() - 1).equals(goal)) {
+                    //Look at the current best path
+                    System.out.println(bestPath.get(0).nodes.get(bestPath.get(0).nodes.size()-1));
+                    System.out.println(bestPath.get(0).length);
+                    Path currentBest = bestPath.remove(0);
+                    //Start from the node we're at on the current best path
+                    Node currentNode = currentBest.nodes.get(currentBest.nodes.size() - 1);
+                    //Create a null object to store
                     Node newNode;
                     //Checking the left node
-                    if (currentNode.row - 1 != -1 && !board[(int) (currentNode.row - 1)][(int) currentNode.column].equals( "+")) {
+                    if (currentNode.row - 1 != -1 && !board[(int) (currentNode.row - 1)][(int) currentNode.column].equals("+")) {
                         Path left = new Path(currentBest);
                         newNode = new Node(currentNode.row - 1, currentNode.column);
                         if (FindIfVisited(newNode) == false) {
@@ -100,13 +105,14 @@ public class AIRobotNavigation {
                         }
                     }
 
-
                 }
-                for(Node node: bestPath.get(0).paths){
+                //Set all the nodes we took to "o"
+                for(Node node: bestPath.get(0).nodes){
                     if(node != initial && node != goal){
                         board[(int) node.row][(int) node.column] = "o";
                     }
                 }
+                //Output the board
                 for (int a = 0; a < boardSize; ++a) {
                     for (int j = 0; j < boardSize ; ++j) {
                         output.print(board[a][j]);
@@ -117,11 +123,9 @@ public class AIRobotNavigation {
                 output.println("\nNumber of steps taken: " + bestPath.get(0).pathCost);
                 output.println("Number of nodes traversed: " + bestPath.size());
                 output.println("\n\n");
-                board = baseBoard;
+                //Reset everything
                 visitedNodes.clear();
-                bestPath.clear();;
-                bestPath.add(new Path((double)0, initial));
-                visitedNodes.add(initial);
+                bestPath.clear();
                 for(int t = 0; t < boardSize; t++){
                     for(int y = 0; y <boardSize; y++){
                         board[t][y] = baseBoard[t][y];
@@ -173,7 +177,7 @@ public class AIRobotNavigation {
                 current.length = current.pathCost + ManhattanDistance(newNode, goal);
                 break;
         }
-        current.paths.add(newNode);
+        current.nodes.add(newNode);
         Collections.sort(bestPath);
         return current;
     }
